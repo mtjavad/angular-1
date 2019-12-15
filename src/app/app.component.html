@@ -1,0 +1,11 @@
+<nav class="navbar navbar-light bg-light navbar-expand mb-5">
+    <div class="navbar-nav">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item nav-link">کارهای امروز</a>
+        <a routerLink="/home" [queryParams]="{mode: 'week'}"  routerLinkActive="active" class="nav-item nav-link">کارهای این هفته</a>
+        <a routerLink="/projects" class="nav-item nav-link">پروژه ها</a>
+        <a routerLink="/labels" class="nav-item nav-link">برچسب ها</a>
+    </div>
+</nav>
+<div class="container">
+<router-outlet></router-outlet>
+</div>

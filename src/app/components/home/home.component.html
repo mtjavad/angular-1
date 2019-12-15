@@ -1,0 +1,69 @@
+
+    <!--<div class="row">-->
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="form-inline justify-content-between">
+        <div class="form-group">
+            <label for="title">کار / وظیفه</label>
+            <input type="text" placeholder="عنوان کار یا وظیفه"  class="form-control" formControlName="title" id="title">
+        </div>
+        <div class="form-group">
+            <label for="project">گروه / دسته</label>
+            <select formControlName="project" class="form-control" id="project">
+                <option *ngFor="let project of projectService.projects" [value]="project.title">{{project.title}}</option>
+            </select>
+        </div>
+        <div class="form-group" >
+            <label for="lables">برچسب (می توانید چند گزینه انتخاب کنید)</label>
+            <select formControlName="lables" multiple  class="form-control" id="lables">
+                <option *ngFor="let lable of projectService.lables" [value]="lable.title">{{lable.title}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="priority">اولویت</label>
+            <select formControlName="priority" class="form-control" id="priority">
+                <option *ngFor="let i of [1,2,3,4,5]" [value]="i">{{i}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <dp-date-picker
+                    dir="rtl"
+                    [(ngModel)]="dateObject"
+                    [ngModelOptions]="{standalone: true}"
+                    mode="day"
+                    [config]="myConfig"
+                    placeholder="تاریخ ددلاین"
+                    theme="dp-material">
+            </dp-date-picker>
+        </div>
+        <div class="form-group">
+        <button class="btn btn-sm btn-success" [disabled]="!taskForm.valid">ثبت</button>
+        </div>
+    </form>
+    <!--</div>-->
+    <hr>
+    <div class="row mt-5">
+        <hr>
+<div *ngIf="getTasks().length != 0" class="col-6">
+    <h3>لیست کارها</h3>
+    <div class="card" *ngFor="let task of getTasks()">
+        <div class="card-header">
+            <a [routerLink]="['/projects',getProjectIdByTitle(task.project), task.id]"><h4 class="card-title">{{task.title}}</h4></a>
+        </div>
+        <div class="card-body">
+            <h5 class="card-text"> گروه: <a [routerLink]="['/projects',getProjectIdByTitle(task.project)]">{{task.project}}</a></h5>
+        <h5> {{task.deadline}}</h5>
+        <h5> اولویت {{task.priority}}</h5>
+        <div>
+            <h5 *ngFor="let lable of task.lables" [ngStyle]="{backgroundColor: lable.color}" class="badge">{{lable.title}}</h5>
+        </div>
+        </div>
+    </div>
+</div>
+    <div *ngIf="getTasks().length == 0"  class="col-6">
+        <h3>تسکی برای نمایش وجود ندارد</h3>
+    </div>
+        <div class="col-2"></div>
+    <div  class="col-4">
+        <h3>لیست پروژه ها</h3>
+        <p *ngFor="let project of projects"><a [routerLink]="['/projects', project.id]">{{project.title}}</a></p>
+    </div>
+    </div>

@@ -1,0 +1,18 @@
+<!--<div class="container">-->
+    <form [formGroup]="lableForm" (ngSubmit)="onSubmit()" class="form-inline">
+        <div class="form-group">
+            <label for="title">افزودن برچسب جدید</label>
+            <input type="text" placeholder="عنوان برچسب"  class="form-control" formControlName="title" id="title">
+        </div>
+        <div class="form-group mr-3">
+            <label for="color">رنگ</label>
+            <select formControlName="color" class="form-control" id="color">
+                <option *ngFor="let i of myColor" [value]="color[i]">{{i}}</option>
+            </select>
+        </div>
+        <button class="btn btn-sm btn-success mr-3" [disabled]="!lableForm.valid">افزودن</button>
+    </form>
+    <hr>
+    <h3>لیست برچسب ها</h3>
+    <p *ngFor="let lable of lables" ><span [ngStyle]="{backgroundColor: lable.color}" class="badge"><a [routerLink]="['/labels',lable.id]">{{lable.title}}</a></span></p>
+<!--</div>-->

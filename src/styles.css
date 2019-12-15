@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "mitra";
+    src: url("./assets/fonts/BMitra.ttf") format('truetype');
+}
+*{
+    direction: rtl;
+    text-align: right;
+    font-family: "mitra";
+    font-size: 16px;
+}

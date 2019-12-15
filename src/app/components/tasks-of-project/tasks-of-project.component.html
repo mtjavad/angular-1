@@ -1,0 +1,2 @@
+<h3> کارهای مربوط به پروژه {{title}}</h3>
+<p *ngFor="let task of tasks"><a [routerLink]="['/projects',getProjectIdByTitle(task.project), task.id]">{{task.title}}</a></p>
